@@ -32,13 +32,13 @@ Add a `plugin_action` keybinding to `~/.config/herdr/config.toml` and reload the
 
 ```toml
 [[keys.command]]
-key = "prefix+g"          # open gitui in a SPLIT pane, beside your work
+key = "prefix+i"          # open gitui in a SPLIT pane, beside your work
 type = "plugin_action"
 command = "herdr-gitui.open-gitui"
 description = "open gitui for current git project"
 
 [[keys.command]]
-key = "prefix+shift+g"    # open gitui in its own TAB
+key = "prefix+shift+i"    # open gitui in its own TAB
 type = "plugin_action"
 command = "herdr-gitui.open-gitui-tab"
 description = "open gitui in a tab for current git project"

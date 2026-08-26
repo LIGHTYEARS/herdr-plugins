@@ -2,13 +2,14 @@
 # Shared helpers for the herdr-gitui launchers.
 # Expected to be `source`d by open-gitui.sh / open-gitui-tab.sh.
 #
-# Design notes (learned the same way the herdr-file-viewer plugin did):
+# Design notes:
 #   * herdr actions run a `command`; there is no declarative "open this pane" knob,
 #     so we shell out to the herdr CLI via $HERDR_BIN_PATH (herdr injects it; we fall
 #     back to `herdr` on PATH).
-#   * A pane command's default cwd is the PLUGIN ROOT, not the active pane's cwd. So
-#     we resolve the git project root of the ACTIVE pane and pass it back into
-#     `plugin pane open --cwd`, so gitui opens the repo the user is standing in.
+#   * A pane command's default cwd is the PLUGIN ROOT, not the active pane's cwd, and
+#     passing --cwd would also break the manifest's relative `scripts/*.sh` path. So we
+#     resolve the git project root of the ACTIVE pane and hand it to the pane via
+#     `--env HERDR_GITUI_TARGET`, and gitui-pane.sh `cd`s there.
 #   * We stay as dumb as possible and degrade to plain "open" on any parse/failure.
 
 set -uo pipefail

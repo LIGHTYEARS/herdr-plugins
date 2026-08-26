@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Idempotent launcher for gitui in a SPLIT pane — used by the `open-gitui` action and a
-# herdr keybinding (e.g. `prefix+g`). "Launch-or-focus-or-toggle", scoped to the current
+# herdr keybinding (e.g. `prefix+i`). "Launch-or-focus-or-toggle", scoped to the current
 # workspace:
 #   - no gitui pane in this workspace -> open a split (focused)
 #   - a gitui pane exists but isn't focused -> focus it
