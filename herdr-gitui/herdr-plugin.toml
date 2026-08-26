@@ -1,0 +1,44 @@
+# herdr-plugin.toml — manifest for the herdr-gitui plugin.
+#
+# A thin herdr plugin that launches gitui (the TUI git client) beside your current
+# work to browse the git repository you're standing in. gitui must already be
+# installed on your system (it is NOT bundled). The plugin opens it in a herdr
+# split pane (or its own tab), pointed at the git project root of the currently
+# focused pane. Open-or-focus-or-toggle idempotency is scoped to the current
+# workspace. There are no event hooks — gitui appears only on an explicit action.
+
+id = "herdr-gitui"
+name = "herdr-gitui"
+version = "1.0.0"
+min_herdr_version = "0.7.0"
+description = "Open gitui in a herdr split / tab to browse the current git project."
+platforms = ["linux", "macos"]
+
+# The gitui pane. herdr performs the split placement on launch; the [[actions]] below
+# summon it. Placement declared here is the default; the action's `--placement` /
+# `--direction` override it at open time.
+[[panes]]
+id = "gitui"
+title = "Git"
+description = "gitui — a TUI git client for the current project."
+placement = "split"
+command = ["bash", "scripts/gitui-pane.sh"]
+
+# The action that summons gitui in a split pane beside the current work.
+# The launcher resolves the active project root, then asks herdr to open the
+# [[panes]] entry above as a split with that working directory.
+[[actions]]
+id = "open-gitui"
+platforms = ["linux", "macos"]
+title = "Open gitui (split)"
+description = "Open gitui in a split pane to browse the current git project."
+command = ["bash", "scripts/open-gitui.sh"]
+
+# The same gitui, opened in its own tab instead of a split. Idempotent across tabs
+# of the current workspace (open-or-switch-or-toggle).
+[[actions]]
+id = "open-gitui-tab"
+platforms = ["linux", "macos"]
+title = "Open gitui (tab)"
+description = "Open gitui in its own tab to browse the current git project."
+command = ["bash", "scripts/open-gitui-tab.sh"]
