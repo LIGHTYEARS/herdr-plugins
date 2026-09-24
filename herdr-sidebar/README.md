@@ -33,24 +33,34 @@ To open clicked files in a terminal editor, configure "Custom editor…" in side
 enable "Use editor on click". Clicking an already-open file focuses its existing editor tab;
 keyboard Enter continues to use the built-in preview.
 
-## Install
+## Install from this repository
 
-Requires herdr 0.8 or newer. Source builds require Rust 1.89 or newer.
+Requires Herdr 0.8 or newer. This fork currently builds from source during installation,
+so Rust 1.89 or newer is required.
 
+```sh
+herdr plugin install LIGHTYEARS/herdr-plugins/herdr-sidebar
 ```
-herdr plugin install alexarthurs/herdr-sidebar/plugins/herdr-sidebar
-```
 
-or from a local checkout:
+This installs this repository's **Δ Workspace** changes. The upstream command
+`herdr plugin install alexarthurs/herdr-sidebar/plugins/herdr-sidebar` installs
+the original plugin instead.
 
-```
-cargo build --release
+## Local development
+
+Build and link a local checkout to debug or change the plugin without reinstalling it:
+
+```sh
+cd /path/to/herdr-plugins/herdr-sidebar
+cargo build --release --locked
 herdr plugin link .
 ```
 
-Open it (or just focus a tab — the hook docks it):
+Rebuild after source changes; the linked plugin uses this checkout's release binary.
 
-```
-herdr plugin action invoke herdr-sidebar.open-sidebar-windows   # windows
-herdr plugin action invoke herdr-sidebar.open-sidebar           # linux / macos
+## Open or toggle
+
+```sh
+herdr plugin action invoke herdr-sidebar.open-sidebar           # Linux / macOS
+herdr plugin action invoke herdr-sidebar.open-sidebar-windows   # Windows
 ```
